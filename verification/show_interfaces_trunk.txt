@@ -1,0 +1,65 @@
+! ===================================================
+! show interfaces trunk - all switches
+! Proves: trunk ports carry VLANs 10,20,30,40
+!         (critical for router-on-a-stick to work)
+! ===================================================
+
+================ SW1 (HQ) ================
+Port        Mode         Encapsulation  Status        Native vlan
+Gig0/1      on           802.1q         trunking      1
+Gig0/2      on           802.1q         trunking      1
+
+Port        Vlans allowed on trunk
+Gig0/1      10,20,30,40
+Gig0/2      10,20,30,40
+
+Port        Vlans allowed and active in management domain
+Gig0/1      10,20,30,40
+Gig0/2      10,20,30,40
+
+Port        Vlans in spanning tree forwarding state and not pruned
+Gig0/1      10,20,30,40
+Gig0/2      10,20,30,40
+
+================ SW2 (HQ) ================
+Port        Mode         Encapsulation  Status        Native vlan
+Gig0/1      on           802.1q         trunking      1
+
+Port        Vlans allowed on trunk
+Gig0/1      10,20,30,40
+
+Port        Vlans allowed and active in management domain
+Gig0/1      10,20,30,40
+
+Port        Vlans in spanning tree forwarding state and not pruned
+Gig0/1      10,20,30,40
+
+================ SW3 (Branch) ================
+Port        Mode         Encapsulation  Status        Native vlan
+Gig0/1      on           802.1q         trunking      1
+Gig0/2      on           802.1q         trunking      1
+
+Port        Vlans allowed on trunk
+Gig0/1      10,20,30,40
+Gig0/2      10,20,30,40
+
+Port        Vlans allowed and active in management domain
+Gig0/1      10,20,30,40
+Gig0/2      10,20,30,40
+
+Port        Vlans in spanning tree forwarding state and not pruned
+Gig0/1      10,20,30,40
+Gig0/2      10,20,30,40
+
+================ SW4 (Branch) ================
+Port        Mode         Encapsulation  Status        Native vlan
+Gig0/1      on           802.1q         trunking      1
+
+Port        Vlans allowed on trunk
+Gig0/1      10,20,30,40
+
+Port        Vlans allowed and active in management domain
+Gig0/1      10,20,30,40
+
+Port        Vlans in spanning tree forwarding state and not pruned
+Gig0/1      10,20,30,40

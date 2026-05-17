@@ -1,0 +1,87 @@
+! ===================================================
+! End-to-end ping tests
+! Proves: DHCP, inter-VLAN routing, and WAN routing
+!         all work end-to-end
+! ===================================================
+
+------- TEST 1: PC1 (HQ VLAN 10) - ipconfig -------
+C:\>ipconfig
+
+FastEthernet0 Connection:(default port)
+
+   Connection-specific DNS Suffix..: 
+   Link-local IPv6 Address.........: FE80::2D0:BCFF:FEC2:9A12
+   IPv6 Address....................: ::
+   IPv4 Address....................: 192.168.10.10
+   Subnet Mask.....................: 255.255.255.0
+   Default Gateway.................: ::
+                                     192.168.10.1
+
+Bluetooth Connection:
+
+   Connection-specific DNS Suffix..: 
+   Link-local IPv6 Address.........: ::
+   IPv6 Address....................: ::
+   IPv4 Address....................: 0.0.0.0
+   Subnet Mask.....................: 0.0.0.0
+   Default Gateway.................: ::
+                                     0.0.0.0
+
+
+Result: PC1 pulled an address from R1's HR pool
+
+
+------- TEST 2: Inter-VLAN routing (HQ V10 -> HQ V20) -------
+C:\>ping 192.168.20.10
+
+Pinging 192.168.20.10 with 32 bytes of data:
+
+Request timed out.
+Reply from 192.168.20.10: bytes=32 time=11ms TTL=127
+Reply from 192.168.20.10: bytes=32 time<1ms TTL=127
+Reply from 192.168.20.10: bytes=32 time=9ms TTL=127
+
+Ping statistics for 192.168.20.10:
+    Packets: Sent = 4, Received = 3, Lost = 1 (25% loss),
+Approximate round trip times in milli-seconds:
+    Minimum = 0ms, Maximum = 11ms, Average = 6ms
+
+Result: Router-on-a-stick routes between VLANs.
+        First packet drops to ARP - this is expected.
+
+
+------- TEST 3: WAN routing (HQ V10 -> Branch V10) -------
+C:\>ping 192.168.110.10
+
+Pinging 192.168.110.10 with 32 bytes of data:
+
+Request timed out.
+Reply from 192.168.110.10: bytes=32 time=3ms TTL=126
+Reply from 192.168.110.10: bytes=32 time=3ms TTL=126
+Reply from 192.168.110.10: bytes=32 time=1ms TTL=126
+
+Ping statistics for 192.168.110.10:
+    Packets: Sent = 4, Received = 3, Lost = 1 (25% loss),
+Approximate round trip times in milli-seconds:
+    Minimum = 1ms, Maximum = 3ms, Average = 2ms
+
+Result: Cross-WAN routing works.
+        TTL dropped from 127 to 126 = one extra router hop.
+
+
+------- TEST 4: Server reachability (any PC -> Server) -------
+C:\>ping 192.168.30.100
+
+Pinging 192.168.30.100 with 32 bytes of data:
+
+Request timed out.
+Reply from 192.168.30.100: bytes=32 time<1ms TTL=127
+Reply from 192.168.30.100: bytes=32 time<1ms TTL=127
+Reply from 192.168.30.100: bytes=32 time<1ms TTL=127
+
+Ping statistics for 192.168.30.100:
+    Packets: Sent = 4, Received = 3, Lost = 1 (25% loss),
+Approximate round trip times in milli-seconds:
+    Minimum = 0ms, Maximum = 0ms, Average = 0ms
+
+Result: Server in VLAN 30 is reachable from VLAN 10.
