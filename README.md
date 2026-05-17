@@ -222,6 +222,3 @@ Real issues hit during the build and how they were resolved. This is what separa
 
 MIT — feel free to fork, study, or adapt.
 
-## Contact
-
-If you have suggestions, spot a bug, or want to discuss network design, open an issue or reach out on [LinkedIn](#).
