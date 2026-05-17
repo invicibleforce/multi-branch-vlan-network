@@ -2,7 +2,7 @@
 
 A two-site corporate network built in Cisco Packet Tracer, demonstrating VLAN segmentation, 802.1Q trunking, router-on-a-stick inter-VLAN routing, centralized DHCP per VLAN, and a serial WAN link with static routing between sites.
 
- **[Read the full write-up on Medium](https://medium.com/@kwadwoosei724/i-spent-45-minutes-troubleshooting-a-cisco-network-that-had-nothing-wrong-with-it-9d1362633d20)** · 
+ **[Read the full write-up on Medium](https://medium.com/@kwadwoosei724/i-spent-45-minutes-troubleshooting-a-cisco-network-that-had-nothing-wrong-with-it-9d1362633d20)**
 ---
 
 ## What this project demonstrates
